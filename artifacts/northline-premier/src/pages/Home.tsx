@@ -16,6 +16,12 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import imgHeroMeeting from "@assets/istockphoto-1057509614-1024x1024_1783877889700.jpg";
+import imgMountainSummit from "@assets/istockphoto-1255203350-1024x1024_1783877889700.jpg";
+import imgTeamHands from "@assets/istockphoto-1322842973-1024x1024(1)_1783877889700.jpg";
+import imgDigitalGlobe from "@assets/istockphoto-1334575820-1024x1024_1783877889700.jpg";
+import imgProfessionals from "@assets/istockphoto-1911521670-1024x1024_1783877889700.jpg";
+import imgProcessWorkflow from "@assets/istockphoto-2232491782-1024x1024_1783877889700.jpg";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -58,11 +64,11 @@ export default function Home() {
         <div className="absolute inset-0 z-0 flex">
           <div className="w-full md:w-[55%] bg-primary"></div>
           <div className="hidden md:block w-[45%] relative">
-            <div className="absolute inset-0 bg-primary/20 mix-blend-multiply z-10"></div>
+            <div className="absolute inset-0 bg-primary/40 mix-blend-multiply z-10"></div>
             <img 
-              src="/hero-bg.png" 
-              alt="Northline Premier background" 
-              className="w-full h-full object-cover"
+              src={imgHeroMeeting}
+              alt="Northline Premier consulting team" 
+              className="w-full h-full object-cover object-center"
             />
           </div>
         </div>
@@ -129,6 +135,22 @@ export default function Home() {
             <p className="text-slate-600 max-w-md text-lg">
               We bridge the gap between traditional consulting rigor and Silicon Valley agility.
             </p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="mb-16 rounded-2xl overflow-hidden relative h-56 shadow-lg"
+          >
+            <img src={imgProcessWorkflow} alt="Our consulting process" className="w-full h-full object-cover object-center" />
+            <div className="absolute inset-0 bg-primary/70"></div>
+            <div className="absolute inset-0 flex items-center justify-center px-8">
+              <p className="text-white text-xl md:text-2xl font-semibold text-center tracking-wide">
+                From diagnosis to delivery — a structured process built for real-world outcomes.
+              </p>
+            </div>
           </motion.div>
 
           <motion.div 
@@ -237,11 +259,17 @@ export default function Home() {
             </motion.div>
             
             <div className="lg:w-1/2 w-full">
-              <img 
-                src="/abstract-bg.png" 
-                alt="Abstract Strategy" 
-                className="w-full rounded-2xl shadow-2xl shadow-black/50 aspect-[4/3] object-cover"
-              />
+              <div className="relative">
+                <img 
+                  src={imgMountainSummit}
+                  alt="Partners helping clients reach the summit" 
+                  className="w-full rounded-2xl shadow-2xl shadow-black/50 aspect-[4/3] object-cover"
+                />
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-primary/60 via-transparent to-transparent"></div>
+                <div className="absolute bottom-6 left-6 right-6">
+                  <p className="text-white font-semibold text-lg italic">"We don't just advise from the sidelines — we climb with you."</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -328,8 +356,7 @@ export default function Home() {
             >
               <div className="w-full aspect-square bg-slate-100 rounded-full relative">
                 <div className="absolute inset-4 rounded-full overflow-hidden border-8 border-white shadow-xl">
-                  <img src="/hero-bg.png" alt="Bay Area" className="w-full h-full object-cover grayscale opacity-80 mix-blend-multiply" />
-                  <div className="absolute inset-0 bg-primary/20 mix-blend-overlay"></div>
+                  <img src={imgProfessionals} alt="Northline Premier consultants" className="w-full h-full object-cover object-top" />
                 </div>
                 <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-secondary rounded-full flex items-center justify-center text-white text-center p-6 shadow-2xl">
                   <span className="font-bold text-lg leading-tight">Founded in SF<br/>2006</span>
@@ -362,17 +389,26 @@ export default function Home() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="py-24 bg-primary text-white">
-        <div className="container mx-auto px-6 md:px-12">
+      <section className="py-24 bg-primary text-white relative overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img src={imgTeamHands} alt="" className="w-full h-full object-cover object-center opacity-10" aria-hidden="true" />
+          <div className="absolute inset-0 bg-primary/90"></div>
+        </div>
+        <div className="container relative z-10 mx-auto px-6 md:px-12">
           <motion.div 
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="mb-16"
+            className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8"
           >
-            <h2 className="text-secondary font-bold tracking-widest uppercase text-sm mb-3">Client Impact</h2>
-            <h3 className="text-3xl md:text-4xl font-bold tracking-tight">Don't just take our word for it.</h3>
+            <div>
+              <h2 className="text-secondary font-bold tracking-widest uppercase text-sm mb-3">Client Impact</h2>
+              <h3 className="text-3xl md:text-4xl font-bold tracking-tight">Don't just take our word for it.</h3>
+            </div>
+            <div className="hidden md:block w-48 h-32 rounded-xl overflow-hidden shadow-xl flex-shrink-0">
+              <img src={imgDigitalGlobe} alt="Digital transformation" className="w-full h-full object-cover object-center" />
+            </div>
           </motion.div>
           
           <motion.div 
