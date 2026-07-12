@@ -21,6 +21,7 @@ import imgWhyNorthline from "@assets/ChatGPT_Image_Jul_12,_2026,_11_36_39_AM_(3)
 import imgServicesBanner from "@assets/ChatGPT_Image_Jul_12,_2026,_11_36_39_AM_(4)_1783881696134.png";
 import imgProfessionals from "@assets/ChatGPT_Image_Jul_12,_2026,_11_36_38_AM_(2)_1783881696134.png";
 import imgDashboard from "@assets/ChatGPT_Image_Jul_12,_2026,_11_40_23_AM_1783881696134.png";
+import imgBayArea from "@assets/ChatGPT_Image_Jul_12,_2026,_11_45_51_AM_1783881963238.png";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -341,6 +342,33 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* BAY AREA BANNER */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeUp}
+        className="relative h-80 md:h-[28rem] overflow-hidden"
+      >
+        <img
+          src={imgBayArea}
+          alt="California coastline at sunset"
+          className="w-full h-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/40 to-transparent"></div>
+        <div className="absolute inset-0 flex items-center">
+          <div className="container mx-auto px-6 md:px-12">
+            <p className="text-secondary font-bold tracking-widest uppercase text-sm mb-3">Our Home</p>
+            <h3 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-tight max-w-xl">
+              Rooted in the Bay Area.
+            </h3>
+            <p className="text-slate-200 text-lg mt-4 max-w-md">
+              Where innovation meets the Pacific — and where our story began.
+            </p>
+          </div>
+        </div>
+      </motion.section>
 
       {/* ABOUT SECTION */}
       <section id="about" className="py-24 md:py-32 bg-white relative">
