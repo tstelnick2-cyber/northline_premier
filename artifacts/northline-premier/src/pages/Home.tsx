@@ -16,12 +16,11 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import imgHeroMeeting from "@assets/istockphoto-1057509614-1024x1024_1783877889700.jpg";
-import imgMountainSummit from "@assets/istockphoto-1255203350-1024x1024_1783877889700.jpg";
-import imgTeamHands from "@assets/istockphoto-1322842973-1024x1024(1)_1783877889700.jpg";
-import imgDigitalGlobe from "@assets/istockphoto-1334575820-1024x1024_1783877889700.jpg";
-import imgProfessionals from "@assets/istockphoto-1911521670-1024x1024_1783877889700.jpg";
-import imgProcessWorkflow from "@assets/istockphoto-2232491782-1024x1024_1783877889700.jpg";
+import imgHeroMeeting from "@assets/ChatGPT_Image_Jul_12,_2026,_11_36_38_AM_(1)_1783881696134.png";
+import imgWhyNorthline from "@assets/ChatGPT_Image_Jul_12,_2026,_11_36_39_AM_(3)_1783881696134.png";
+import imgServicesBanner from "@assets/ChatGPT_Image_Jul_12,_2026,_11_36_39_AM_(4)_1783881696134.png";
+import imgProfessionals from "@assets/ChatGPT_Image_Jul_12,_2026,_11_36_38_AM_(2)_1783881696134.png";
+import imgDashboard from "@assets/ChatGPT_Image_Jul_12,_2026,_11_40_23_AM_1783881696134.png";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -144,7 +143,7 @@ export default function Home() {
             variants={fadeUp}
             className="mb-16 rounded-2xl overflow-hidden relative h-56 shadow-lg"
           >
-            <img src={imgProcessWorkflow} alt="Our consulting process" className="w-full h-full object-cover object-center" />
+            <img src={imgServicesBanner} alt="Our consulting process" className="w-full h-full object-cover object-center" />
             <div className="absolute inset-0 bg-primary/70"></div>
             <div className="absolute inset-0 flex items-center justify-center px-8">
               <p className="text-white text-xl md:text-2xl font-semibold text-center tracking-wide">
@@ -261,8 +260,8 @@ export default function Home() {
             <div className="lg:w-1/2 w-full">
               <div className="relative">
                 <img 
-                  src={imgMountainSummit}
-                  alt="Partners helping clients reach the summit" 
+                  src={imgWhyNorthline}
+                  alt="Northline Premier team at work" 
                   className="w-full rounded-2xl shadow-2xl shadow-black/50 aspect-[4/3] object-cover"
                 />
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-primary/60 via-transparent to-transparent"></div>
@@ -391,7 +390,7 @@ export default function Home() {
       {/* TESTIMONIALS */}
       <section className="py-24 bg-primary text-white relative overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img src={imgTeamHands} alt="" className="w-full h-full object-cover object-center opacity-10" aria-hidden="true" />
+          <img src={imgHeroMeeting} alt="" className="w-full h-full object-cover object-center opacity-10" aria-hidden="true" />
           <div className="absolute inset-0 bg-primary/90"></div>
         </div>
         <div className="container relative z-10 mx-auto px-6 md:px-12">
@@ -407,7 +406,7 @@ export default function Home() {
               <h3 className="text-3xl md:text-4xl font-bold tracking-tight">Don't just take our word for it.</h3>
             </div>
             <div className="hidden md:block w-48 h-32 rounded-xl overflow-hidden shadow-xl flex-shrink-0">
-              <img src={imgDigitalGlobe} alt="Digital transformation" className="w-full h-full object-cover object-center" />
+              <img src={imgDashboard} alt="Business performance" className="w-full h-full object-cover object-center" />
             </div>
           </motion.div>
           
