@@ -22,6 +22,7 @@ import imgServicesBanner from "@assets/ChatGPT_Image_Jul_12,_2026,_11_36_39_AM_(
 import imgProfessionals from "@assets/ChatGPT_Image_Jul_12,_2026,_11_36_38_AM_(2)_1783881696134.png";
 import imgDashboard from "@assets/ChatGPT_Image_Jul_12,_2026,_11_40_23_AM_1783881696134.png";
 import imgBayArea from "@assets/ChatGPT_Image_Jul_12,_2026,_11_45_51_AM_1783881963238.png";
+import imgHeroBg from "@assets/ChatGPT_Image_Jul_12,_2026,_12_26_21_PM_1783884477427.png";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -62,7 +63,15 @@ export default function Home() {
       {/* HERO SECTION */}
       <section className="relative min-h-[100dvh] flex items-center bg-primary overflow-hidden">
         <div className="absolute inset-0 z-0 flex">
-          <div className="w-full md:w-[55%] bg-primary"></div>
+          <div className="w-full md:w-[55%] relative overflow-hidden">
+            <img
+              src={imgHeroBg}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover object-center"
+              aria-hidden="true"
+            />
+            <div className="absolute inset-0 bg-primary/70"></div>
+          </div>
           <div className="hidden md:block w-[45%] relative">
             <div className="absolute inset-0 bg-primary/40 mix-blend-multiply z-10"></div>
             <img 
