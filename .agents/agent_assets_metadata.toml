@@ -1,0 +1,14 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "crRczaUebwKu0a9MM9TI2"
+uri = "file://artifacts/northline-premier/public/hero-bg.png"
+type = "image"
+title = "Navy architectural glass"
+
+[[generated]]
+id = "bQVTxRk-D2ZEJ9vBclmD5"
+uri = "file://artifacts/northline-premier/public/abstract-bg.png"
+type = "image"
+title = "Abstract navy geometric"
