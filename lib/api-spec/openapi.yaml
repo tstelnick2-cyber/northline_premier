@@ -10,6 +10,14 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: storage
+    description: Object storage upload and serving endpoints
+  - name: users
+    description: User management
+  - name: files
+    description: File management for employees
+  - name: messages
+    description: Messaging between employees and admins
 paths:
   /healthz:
     get:
@@ -24,6 +32,296 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /storage/uploads/request-url:
+    post:
+      tags: [storage]
+      operationId: requestUploadUrl
+      summary: Request a presigned URL for file upload
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UploadUrlRequest"
+      responses:
+        "200":
+          description: Presigned upload URL generated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadUrlResponse"
+        "400":
+          description: Missing or invalid required fields
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+        "500":
+          description: Failed to generate upload URL
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+
+  /storage/public-objects/{filePath}:
+    get:
+      tags: [storage]
+      operationId: getPublicObject
+      summary: Serve a public asset
+      parameters:
+        - name: filePath
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Object content
+          content:
+            "*/*":
+              schema:
+                type: string
+                format: binary
+        "404":
+          description: File not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+
+  /storage/objects/{objectPath}:
+    get:
+      tags: [storage]
+      operationId: getStorageObject
+      summary: Serve a private object
+      parameters:
+        - name: objectPath
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Object content
+          content:
+            "*/*":
+              schema:
+                type: string
+                format: binary
+        "404":
+          description: Object not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+
+  /users/me:
+    get:
+      operationId: getMe
+      tags: [users]
+      summary: Get current user profile
+      responses:
+        "200":
+          description: Current user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+
+  /users:
+    get:
+      operationId: listUsers
+      tags: [users]
+      summary: List all users (admin only)
+      responses:
+        "200":
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+
+  /users/{userId}/role:
+    patch:
+      operationId: updateUserRole
+      tags: [users]
+      summary: Update user role (admin only)
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoleUpdate"
+      responses:
+        "200":
+          description: Updated user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+
+  /files:
+    get:
+      operationId: listFiles
+      tags: [files]
+      summary: List files (filtered by assignedTo for employees, all for admin)
+      parameters:
+        - name: userId
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of files
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PortalFile"
+    post:
+      operationId: createFile
+      tags: [files]
+      summary: Create a file record after upload
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FileInput"
+      responses:
+        "201":
+          description: Created file record
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PortalFile"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+
+  /files/{fileId}:
+    delete:
+      operationId: deleteFile
+      tags: [files]
+      summary: Delete a file (admin only)
+      parameters:
+        - name: fileId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+
+  /messages:
+    get:
+      operationId: listMessages
+      tags: [messages]
+      summary: List messages for current user
+      parameters:
+        - name: withUserId
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Message"
+    post:
+      operationId: sendMessage
+      tags: [messages]
+      summary: Send a message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MessageInput"
+      responses:
+        "201":
+          description: Sent message
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+
+  /messages/unread-count:
+    get:
+      operationId: getUnreadCount
+      tags: [messages]
+      summary: Get unread message count
+      responses:
+        "200":
+          description: Unread count
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnreadCount"
+
+  /messages/{messageId}/read:
+    patch:
+      operationId: markMessageRead
+      tags: [messages]
+      summary: Mark a message as read
+      parameters:
+        - name: messageId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Updated message
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +332,139 @@ components:
       required:
         - status
 
+    ErrorEnvelope:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+
+    UploadUrlRequest:
+      type: object
+      required: [name, size, contentType]
+      properties:
+        name:
+          type: string
+          minLength: 1
+        size:
+          type: integer
+          minimum: 1
+        contentType:
+          type: string
+          minLength: 1
+
+    UploadUrlResponse:
+      type: object
+      required: [uploadURL, objectPath]
+      properties:
+        uploadURL:
+          type: string
+        objectPath:
+          type: string
+        metadata:
+          $ref: "#/components/schemas/UploadUrlRequest"
+
+    User:
+      type: object
+      required: [id, clerkId, email, role, createdAt]
+      properties:
+        id:
+          type: integer
+        clerkId:
+          type: string
+        email:
+          type: string
+        name:
+          type: ["string", "null"]
+        role:
+          type: string
+          enum: [admin, employee]
+        createdAt:
+          type: string
+          format: date-time
+
+    RoleUpdate:
+      type: object
+      required: [role]
+      properties:
+        role:
+          type: string
+          enum: [admin, employee]
+
+    PortalFile:
+      type: object
+      required: [id, uploadedById, assignedToId, fileType, objectPath, filename, createdAt]
+      properties:
+        id:
+          type: integer
+        uploadedById:
+          type: integer
+        assignedToId:
+          type: integer
+        fileType:
+          type: string
+          enum: [paystub, verification, document]
+        objectPath:
+          type: string
+        filename:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        assignedTo:
+          $ref: "#/components/schemas/User"
+        uploadedBy:
+          $ref: "#/components/schemas/User"
+
+    FileInput:
+      type: object
+      required: [assignedToId, fileType, objectPath, filename]
+      properties:
+        assignedToId:
+          type: integer
+        fileType:
+          type: string
+          enum: [paystub, verification, document]
+        objectPath:
+          type: string
+        filename:
+          type: string
+
+    Message:
+      type: object
+      required: [id, fromUserId, toUserId, body, createdAt, read]
+      properties:
+        id:
+          type: integer
+        fromUserId:
+          type: integer
+        toUserId:
+          type: integer
+        body:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        read:
+          type: boolean
+        fromUser:
+          $ref: "#/components/schemas/User"
+        toUser:
+          $ref: "#/components/schemas/User"
+
+    MessageInput:
+      type: object
+      required: [toUserId, body]
+      properties:
+        toUserId:
+          type: integer
+        body:
+          type: string
+          minLength: 1
+
+    UnreadCount:
+      type: object
+      required: [count]
+      properties:
+        count:
+          type: integer
