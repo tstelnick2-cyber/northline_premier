@@ -44,8 +44,8 @@ export function AppLayout({ children }: { children: ReactNode }) {
           <div className="flex justify-between h-16">
             <div className="flex">
               <div className="flex-shrink-0 flex items-center gap-3">
-                <img src={`${basePath}/logo.svg`} alt="Northline Premier Logo" className="h-8 w-8" />
-                <span className="font-semibold text-lg text-primary hidden sm:block">Northline Premier</span>
+                <img src={`${basePath}/logo.svg`} alt="Northline Connect Logo" className="h-8 w-8" />
+                <span className="font-semibold text-lg text-primary hidden sm:block">Northline Connect</span>
               </div>
             </div>
             <div className="flex items-center gap-4">

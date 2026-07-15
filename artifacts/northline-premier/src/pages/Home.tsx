@@ -506,7 +506,7 @@ export default function Home() {
                     <div className="text-secondary font-semibold text-sm mb-1 uppercase tracking-wider">Contact</div>
                     <div className="text-slate-200">
                       partners@northlinepremier.com<br/>
-                      (415) 555-0198
+                      (857) 392-2994
                     </div>
                   </div>
                 </div>

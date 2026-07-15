@@ -91,13 +91,13 @@ router.get("/storage/objects/*path", async (req: Request, res: Response) => {
     const objectPath = `/objects/${wildcardPath}`;
     const objectFile = await objectStorageService.getObjectEntityFile(objectPath);
 
-    // --- Protected route example (uncomment when using replit-auth) ---
-    // if (!req.isAuthenticated()) {
+    // --- Protected route example (uncomment when using clerk-auth) ---
+    // if (!req.auth?.userId) {
     //   res.status(401).json({ error: "Unauthorized" });
     //   return;
     // }
     // const canAccess = await objectStorageService.canAccessObjectEntity({
-    //   userId: req.user.id,
+    //   userId: req.auth.userId,
     //   objectFile,
     //   requestedPermission: ObjectPermission.READ,
     // });

@@ -10,8 +10,8 @@ export function LandingPage() {
       <header className="bg-white border-b border-gray-200 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <img src={`${basePath}/logo.svg`} alt="Northline Premier" className="h-10 w-10" />
-            <span className="font-semibold text-xl text-primary tracking-tight">Northline Premier</span>
+            <img src={`${basePath}/logo.svg`} alt="Northline Connect" className="h-10 w-10" />
+            <span className="font-semibold text-xl text-primary tracking-tight">Northline Connect</span>
           </div>
           <div className="flex items-center gap-4">
             <Link href="/sign-in" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">
@@ -28,7 +28,7 @@ export function LandingPage() {
         <section className="relative pt-24 pb-32 overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 tracking-tight mb-6">
-              Employee Portal
+              Northline Connect
             </h1>
             <p className="mt-4 text-xl text-gray-600 max-w-2xl mx-auto mb-10">
               Access your paystubs, download important documents, and communicate securely with the HR team all in one place.
@@ -81,8 +81,8 @@ export function LandingPage() {
 
       <footer className="bg-gray-900 text-gray-400 py-12 text-center">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-          <img src={`${basePath}/logo.svg`} alt="Northline Premier" className="h-8 w-8 mb-4 opacity-50 grayscale" />
-          <p>&copy; {new Date().getFullYear()} Northline Premier. All rights reserved.</p>
+          <img src={`${basePath}/logo.svg`} alt="Northline Connect" className="h-8 w-8 mb-4 opacity-50 grayscale" />
+          <p>&copy; {new Date().getFullYear()} Northline Connect. All rights reserved.</p>
         </div>
       </footer>
     </div>

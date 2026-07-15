@@ -1,14 +1,14 @@
+import path from "path";
+import { config as loadEnv } from "dotenv";
 import app from "./app";
 import { logger } from "./lib/logger";
 
-const rawPort = process.env["PORT"];
+const repoRootEnv = path.resolve(import.meta.dirname, "..", "..", "..", ".env");
+const localEnv = path.resolve(import.meta.dirname, "..", ".env");
+loadEnv({ path: localEnv });
+loadEnv({ path: repoRootEnv });
 
-if (!rawPort) {
-  throw new Error(
-    "PORT environment variable is required but was not provided.",
-  );
-}
-
+const rawPort = process.env["PORT"] ?? "4000";
 const port = Number(rawPort);
 
 if (Number.isNaN(port) || port <= 0) {
